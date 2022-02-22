@@ -9,22 +9,24 @@ describe('Test main menu', () => {
         // https://github.com/shopware/e2e-testsuite-platform/blob/3.x/cypress/support/commands/system-commands.js#L26
         cy.loginViaApi()
             .then(() => {
-                cy.openInitialPage(`/admin`);
+                cy.openInitialPage('/admin');
             });
     });
 
-    it('should open module through menu (general)', () => {
-        cy.get('.sw-admin-menu')
-            .should('be.visible')
-            .then(() => {
-                cy.get('.sw-admin-menu__item--sw-catalogue').click();
-                cy.get('.sw-admin-menu__item--sw-catalogue .router-link-active').should('be.visible');
-                cy.get(`.sw-admin-menu__item--sw-catalogue .sw-admin-menu__navigation-list-item.sw-product`)
-                    .should('be.visible');
-                cy.get(`.sw-admin-menu__item--sw-catalogue .sw-admin-menu__navigation-list-item.sw-product`)
-                    .click();
-            });
-        cy.url().should('include', '#/sw/product/index');
+    Cypress._.times(100, (k) => {
+        it('should open module through menu (general)', () => {
+            cy.get('.sw-admin-menu')
+                .should('be.visible')
+                .then(() => {
+                    cy.get('.sw-admin-menu__item--sw-catalogue').click();
+                    cy.get('.sw-admin-menu__item--sw-catalogue .router-link-active').should('be.visible');
+                    cy.get(`.sw-admin-menu__item--sw-catalogue .sw-admin-menu__navigation-list-item.sw-product`)
+                        .should('be.visible');
+                    cy.get(`.sw-admin-menu__item--sw-catalogue .sw-admin-menu__navigation-list-item.sw-product`)
+                        .click();
+                });
+            cy.url().should('include', '#/sw/product/index');
+        });
     });
 
     it.skip('should open module through menu (current workaround)', () => {
