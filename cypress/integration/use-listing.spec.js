@@ -37,6 +37,10 @@ describe('Test main menu', () => {
             method: 'POST'
         }).as('saveData');
 
+        cy.get('input.sw-search-bar__input').typeAndCheckSearchField('Product name');
+        cy.get(`${page.elements.dataGridRow}--0 .sw-data-grid__cell--name`)
+            .contains('Product name');
+
         // Navigate to variant generator listing and start
         cy.clickContextMenuItem(
             '.sw-entity-listing__context-menu-edit-action',
